@@ -3,73 +3,278 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Article Summarizer Extension - Save Time, Get Key Info Fast</title>
-</head>
-<body style="font-family: system-ui, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; color: #343a40; line-height: 1.6; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">
-    <!-- Hero Section -->
-    <section class="hero" style="background-color: #e9f5ff; padding: 80px 20px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh;">
-        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 20px;">
-            <h1 style="color: #007bff; margin-bottom: 20px; line-height: 1.2; font-size: 3.5em; text-align: center; max-width: 900px;">Summarize Smarter, Not Harder.</h1>
-            <p style="margin-bottom: 30px; font-size: 1.4em; max-width: 800px; color: #495057;">A browser extension that summarises long articles before you read them, helping busy professionals, students, and researchers quickly grasp key information and save time.</p>
-            <a href="#install" class="btn" style="display: inline-block; background-color: #007bff; color: #ffffff; padding: 12px 25px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 1.1em; border: none; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">Get the Extension Now</a>
-            <!-- Placeholder for an illustrative image representing summarization -->
-            <img src="https://via.placeholder.com/600x350/e9f5ff/007bff?text=Article+Summarizer+in+Action" alt="Screenshot of the Article Summarizer Extension providing a summary" class="hero-image" style="max-width: 600px; width: 100%; height: auto; margin-top: 40px; border-radius: 10px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); display: block;">
-        </div>
-    </section>
+    <title>Summarize Anything - Your Smart Article Summarizer Extension</title>
+    <style>
+        /* General Body Styles */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+            scroll-behavior: smooth;
+        }
 
-    <!-- Features Section -->
-    <section class="features" style="padding: 60px 0;">
-        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 20px;">
-            <h2 style="color: #212529; margin-bottom: 30px; line-height: 1.2; font-size: 2.2em; text-align: center; margin-top: 40px;">Key Features Designed for You</h2>
-            <div class="features-grid" style="display: flex; flex-wrap: wrap; justify-content: center; margin-top: 40px;">
-                <div class="feature-card" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); padding: 30px; flex-grow: 1; flex-shrink: 1; flex-basis: calc(33% - 60px); min-width: 280px; text-align: center; display: flex; flex-direction: column; align-items: center; margin: 15px;">
-                    <span class="feature-icon" style="font-size: 3em; color: #007bff; margin-bottom: 15px; display: block;">&#x26a1;</span>
-                    <h3 style="color: #007bff; margin-top: 15px; margin-bottom: 10px; line-height: 1.2; font-size: 1.6em;">One-Click Summary Generation</h3>
-                    <p style="margin-bottom: 15px; font-size: 1em; color: #6c757d;">Instantly generate a concise summary of any article on your webpage with a single click.</p>
+        /* Container for content centering and max-width */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Hero Section Styling */
+        .hero {
+            background-color: #e0f7fa; /* Light blue background */
+            color: #004d40; /* Dark teal text */
+            text-align: center;
+            padding: 80px 20px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero h1 {
+            font-size: 3.2em;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            font-weight: 700;
+            color: #004d40;
+        }
+
+        .hero p {
+            font-size: 1.4em;
+            margin-bottom: 40px;
+            max-width: 700px;
+            color: #00695c;
+        }
+
+        /* Call-to-Action Button Styling */
+        .cta-button {
+            display: inline-block;
+            background-color: #007bff; /* Primary blue */
+            color: white;
+            padding: 18px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.3em;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 6px 15px rgba(0, 123, 255, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4);
+        }
+
+        /* Features Section Styling */
+        .features {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .features h2 {
+            font-size: 2.8em;
+            margin-bottom: 60px;
+            color: #2c3e50;
+            font-weight: 700;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            text-align: left;
+        }
+
+        .feature-item {
+            background-color: white;
+            padding: 35px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .feature-item h3 {
+            font-size: 1.6em;
+            color: #007bff;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .feature-item p {
+            font-size: 1.15em;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        /* Final Call to Action Section */
+        .final-cta {
+            text-align: center;
+            padding: 80px 20px;
+            background-color: #f0f8ff; /* Lighter blue */
+            border-radius: 12px;
+            margin-top: 60px;
+            margin-bottom: 40px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+        }
+
+        .final-cta h2 {
+            font-size: 2.5em;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        .final-cta p {
+            font-size: 1.3em;
+            color: #555;
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 60px 15px;
+            }
+            .hero h1 {
+                font-size: 2.5em;
+            }
+            .hero p {
+                font-size: 1.2em;
+            }
+            .cta-button {
+                padding: 15px 30px;
+                font-size: 1.1em;
+            }
+            .features h2 {
+                font-size: 2.2em;
+                margin-bottom: 40px;
+            }
+            .feature-grid {
+                grid-template-columns: 1fr; /* Stack features on smaller screens */
+            }
+            .feature-item {
+                padding: 25px;
+            }
+            .feature-item h3 {
+                font-size: 1.4em;
+            }
+            .feature-item p {
+                font-size: 1.05em;
+            }
+            .final-cta {
+                padding: 60px 15px;
+            }
+            .final-cta h2 {
+                font-size: 2em;
+            }
+            .final-cta p {
+                font-size: 1.1em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 40px 10px;
+            }
+            .hero h1 {
+                font-size: 2em;
+            }
+            .hero p {
+                font-size: 1em;
+            }
+            .cta-button {
+                padding: 12px 25px;
+                font-size: 1em;
+            }
+            .features h2 {
+                font-size: 1.8em;
+            }
+            .feature-item {
+                padding: 20px;
+            }
+            .feature-item h3 {
+                font-size: 1.3em;
+            }
+            .feature-item p {
+                font-size: 1em;
+            }
+            .final-cta {
+                padding: 40px 10px;
+            }
+            .final-cta h2 {
+                font-size: 1.8em;
+            }
+            .final-cta p {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Summarize Any Article. Instantly.</h1>
+            <p>A powerful browser extension that condenses lengthy articles into key insights, helping busy professionals, students, and knowledge workers quickly grasp essential information and save precious time.</p>
+            <a href="#download" class="cta-button">Get the Extension Now</a>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features">
+            <h2>Unlock Your Reading Potential</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <h3>One-Click Summary Generation</h3>
+                    <p>Get a concise summary of any article with just a single click on the extension icon. No more endless scrolling or information overload.</p>
                 </div>
-                <div class="feature-card" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); padding: 30px; flex-grow: 1; flex-shrink: 1; flex-basis: calc(33% - 60px); min-width: 280px; text-align: center; display: flex; flex-direction: column; align-items: center; margin: 15px;">
-                    <span class="feature-icon" style="font-size: 3em; color: #007bff; margin-bottom: 15px; display: block;">&#x2699;&#xfe0f;</span>
-                    <h3 style="color: #007bff; margin-top: 15px; margin-bottom: 10px; line-height: 1.2; font-size: 1.6em;">Customizable Summary Length</h3>
-                    <p style="margin-bottom: 15px; font-size: 1em; color: #6c757d;">Tailor summaries to your needs &#x2013; choose short, medium, long, or a specific word/sentence count.</p>
+                <div class="feature-item">
+                    <h3>Customizable Summary Length</h3>
+                    <p>Tailor your summaries to your needs. Choose between short bullet points, medium paragraphs, or a more detailed synopsis.</p>
                 </div>
-                <div class="feature-card" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); padding: 30px; flex-grow: 1; flex-shrink: 1; flex-basis: calc(33% - 60px); min-width: 280px; text-align: center; display: flex; flex-direction: column; align-items: center; margin: 15px;">
-                    <span class="feature-icon" style="font-size: 3em; color: #007bff; margin-bottom: 15px; display: block;">&#x1f4dd;</span>
-                    <h3 style="color: #007bff; margin-top: 15px; margin-bottom: 10px; line-height: 1.2; font-size: 1.6em;">Key Takeaways/Bullet Points</h3>
-                    <p style="margin-bottom: 15px; font-size: 1em; color: #6c757d;">Get summaries presented in easy-to-digest bullet points, highlighting the core concepts.</p>
+                <div class="feature-item">
+                    <h3>Key Takeaways & Bullet Points</h3>
+                    <p>Our summaries are designed for quick comprehension, presenting core arguments and findings in an easy-to-read, bulleted format.</p>
                 </div>
-                <div class="feature-card" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); padding: 30px; flex-grow: 1; flex-shrink: 1; flex-basis: calc(33% - 60px); min-width: 280px; text-align: center; display: flex; flex-direction: column; align-items: center; margin: 15px;">
-                    <span class="feature-icon" style="font-size: 3em; color: #007bff; margin-bottom: 15px; display: block;">&#x1f50d;</span>
-                    <h3 style="color: #007bff; margin-top: 15px; margin-bottom: 10px; line-height: 1.2; font-size: 1.6em;">Contextual Highlighting</h3>
-                    <p style="margin-bottom: 15px; font-size: 1em; color: #6c757d;">See key sentences or phrases in the original article highlighted, corresponding to your summary points.</p>
+                <div class="feature-item">
+                    <h3>Contextual Summary Display</h3>
+                    <p>View summaries in a non-intrusive overlay or a collapsible sidebar, allowing you to reference key points alongside the original article.</p>
                 </div>
-                <div class="feature-card" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); padding: 30px; flex-grow: 1; flex-shrink: 1; flex-basis: calc(33% - 60px); min-width: 280px; text-align: center; display: flex; flex-direction: column; align-items: center; margin: 15px;">
-                    <span class="feature-icon" style="font-size: 3em; color: #007bff; margin-bottom: 15px; display: block;">&#x1f4da;</span>
-                    <h3 style="color: #007bff; margin-top: 15px; margin-bottom: 10px; line-height: 1.2; font-size: 1.6em;">Summary History &amp; Management</h3>
-                    <p style="margin-bottom: 15px; font-size: 1em; color: #6c757d;">Access a history of all your summarized articles, allowing you to revisit summaries and original links anytime.</p>
+                <div class="feature-item">
+                    <h3>Copy & Share with Ease</h3>
+                    <p>Instantly copy generated summaries to your clipboard or share them directly with colleagues and friends via email or messaging apps.</p>
                 </div>
-                <div class="feature-card" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); padding: 30px; flex-grow: 1; flex-shrink: 1; flex-basis: calc(33% - 60px); min-width: 280px; text-align: center; display: flex; flex-direction: column; align-items: center; margin: 15px;">
-                    <span class="feature-icon" style="font-size: 3em; color: #007bff; margin-bottom: 15px; display: block;">&#x1f4e4;</span>
-                    <h3 style="color: #007bff; margin-top: 15px; margin-bottom: 10px; line-height: 1.2; font-size: 1.6em;">Share Summary</h3>
-                    <p style="margin-bottom: 15px; font-size: 1em; color: #6c757d;">Easily copy the summary text or share it directly via email or your favorite social media platforms.</p>
+                <div class="feature-item">
+                    <h3>Multi-Language Support</h3>
+                    <p>Break down language barriers! Summarize articles not just in English, but also in Spanish, French, German, and many other languages.</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Call to Action Section -->
-    <section class="cta-section" id="install" style="background-color: #007bff; color: #ffffff; padding: 60px 20px; text-align: center; margin-top: 60px;">
-        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 20px;">
-            <h2 style="color: #ffffff; margin-bottom: 20px; line-height: 1.2; font-size: 2.5em; text-align: center; margin-top: 0;">Ready to Reclaim Your Reading Time?</h2>
-            <p style="margin: 0 auto 30px auto; font-size: 1.2em; max-width: 700px;">Join thousands of busy professionals, students, and researchers who are already saving hours every week. Install the Article Summarizer today!</p>
-            <a href="#" class="btn" style="display: inline-block; background-color: #28a745; color: #ffffff; padding: 12px 25px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 1.1em; border: none; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">Add to Chrome - It's Free!</a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer" style="text-align: center; padding: 30px 20px; margin-top: 50px; color: #6c757d; font-size: 0.9em; border-top: 1px solid #e9ecef;">
-        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 20px;">
-            <p style="margin-bottom: 15px;">&copy; 2023 Article Summarizer. All rights reserved.</p>
-        </div>
-    </footer>
+        <!-- Final Call to Action Section -->
+        <section class="final-cta" id="download">
+            <h2>Ready to Save Hours of Reading Every Week?</h2>
+            <p>Join thousands of busy professionals, students, and knowledge workers who are already boosting their productivity and staying informed effortlessly.</p>
+            <a href="#" class="cta-button">Add to Chrome - It's Free!</a>
+        </section>
+    </div>
 </body>
 </html>
