@@ -3,307 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QuickRead AI - Summarize Articles Instantly</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #4F46E5; /* Indigo 600 */
-            --primary-dark: #4338CA; /* Indigo 700 */
-            --secondary-color: #10B981; /* Emerald 500 */
-            --text-color: #1F2937; /* Gray 900 */
-            --text-light: #4B5563; /* Gray 700 */
-            --background-light: #F9FAFB; /* Gray 50 */
-            --background-white: #FFFFFF;
-            --border-color: #E5E7EB; /* Gray 200 */
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        }
-
-        /* Base Styles */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: var(--text-color);
-            background-color: var(--background-white);
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
-
-        /* Header */
-        header {
-            background-color: var(--background-white);
-            padding: 1rem 0;
-            border-bottom: 1px solid var(--border-color);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            text-decoration: none;
-        }
-
-        /* Hero Section */
-        #hero {
-            background-color: var(--background-light);
-            padding: 6rem 0;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 70vh; /* Ensure it takes up a good portion of the viewport */
-        }
-
-        #hero h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
-            line-height: 1.1;
-        }
-
-        #hero p {
-            font-size: 1.5rem;
-            color: var(--text-light);
-            max-width: 800px;
-            margin-bottom: 2.5rem;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--primary-color);
-            color: var(--background-white);
-            padding: 1rem 2.5rem;
-            border-radius: 0.5rem;
-            text-decoration: none;
-            font-size: 1.25rem;
-            font-weight: 600;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-2px);
-        }
-
-        /* Features Section */
-        #features {
-            padding: 5rem 0;
-            background-color: var(--background-white);
-        }
-
-        #features h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 3.5rem;
-            color: var(--text-color);
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-card {
-            background-color: var(--background-light);
-            padding: 2.5rem;
-            border-radius: 0.75rem;
-            box-shadow: var(--shadow-md);
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid var(--border-color);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
-
-        .feature-card h3 {
-            font-size: 1.75rem;
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-
-        .feature-card p {
-            font-size: 1.1rem;
-            color: var(--text-light);
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--text-color);
-            color: var(--background-white);
-            padding: 3rem 0;
-            text-align: center;
-            font-size: 0.9rem;
-        }
-
-        footer p {
-            margin-bottom: 0.5rem;
-        }
-
-        footer a {
-            color: var(--primary-color);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        footer a:hover {
-            color: var(--secondary-color);
-        }
-
-        /* Responsive Adjustments */
-        @media (max-width: 1024px) {
-            #hero h1 {
-                font-size: 3rem;
-            }
-            #hero p {
-                font-size: 1.3rem;
-            }
-            #features h2 {
-                font-size: 2.2rem;
-            }
-            .feature-card h3 {
-                font-size: 1.5rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            #hero {
-                padding: 4rem 0;
-                min-height: 60vh;
-            }
-            #hero h1 {
-                font-size: 2.5rem;
-            }
-            #hero p {
-                font-size: 1.1rem;
-            }
-            .btn {
-                padding: 0.8rem 2rem;
-                font-size: 1.1rem;
-            }
-            #features {
-                padding: 3rem 0;
-            }
-            #features h2 {
-                font-size: 2rem;
-                margin-bottom: 2.5rem;
-            }
-            .features-grid {
-                grid-template-columns: 1fr; /* Stack features on small screens */
-            }
-            .feature-card {
-                padding: 2rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 1rem;
-            }
-            .logo {
-                font-size: 1.5rem;
-            }
-            #hero h1 {
-                font-size: 2rem;
-            }
-            #hero p {
-                font-size: 1rem;
-            }
-            .btn {
-                padding: 0.7rem 1.8rem;
-                font-size: 1rem;
-            }
-            #features h2 {
-                font-size: 1.8rem;
-            }
-            .feature-card h3 {
-                font-size: 1.3rem;
-            }
-            .feature-card p {
-                font-size: 1rem;
-            }
-        }
-    </style>
+    <title>Article Summarizer Extension - Save Time, Get Key Info Fast</title>
 </head>
-<body>
-    <header>
-        <div class="container navbar">
-            <a href="#" class="logo">QuickRead AI</a>
+<body style="font-family: system-ui, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; color: #343a40; line-height: 1.6; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">
+    <!-- Hero Section -->
+    <section class="hero" style="background-color: #e9f5ff; padding: 80px 20px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+            <h1 style="color: #007bff; margin-bottom: 20px; line-height: 1.2; font-size: 3.5em; text-align: center; max-width: 900px;">Summarize Smarter, Not Harder.</h1>
+            <p style="margin-bottom: 30px; font-size: 1.4em; max-width: 800px; color: #495057;">A browser extension that summarises long articles before you read them, helping busy professionals, students, and researchers quickly grasp key information and save time.</p>
+            <a href="#install" class="btn" style="display: inline-block; background-color: #007bff; color: #ffffff; padding: 12px 25px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 1.1em; border: none; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">Get the Extension Now</a>
+            <!-- Placeholder for an illustrative image representing summarization -->
+            <img src="https://via.placeholder.com/600x350/e9f5ff/007bff?text=Article+Summarizer+in+Action" alt="Screenshot of the Article Summarizer Extension providing a summary" class="hero-image" style="max-width: 600px; width: 100%; height: auto; margin-top: 40px; border-radius: 10px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); display: block;">
         </div>
-    </header>
+    </section>
 
-    <main>
-        <section id="hero">
-            <div class="container">
-                <h1>QuickRead AI: Summarize Articles Instantly.</h1>
-                <p>A browser extension that summarises long articles before you read them, helping busy professionals, students, and casual readers quickly grasp key information and decide if a full read is necessary.</p>
-                <a href="#" class="btn">Add to Chrome - It's Free!</a>
-            </div>
-        </section>
-
-        <section id="features">
-            <div class="container">
-                <h2>Powerful Features to Boost Your Reading Efficiency</h2>
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <h3>On-Demand Summary Generation</h3>
-                        <p>Get a concise summary of the current web article with a single click of the extension icon.</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3>Customizable Summary Length</h3>
-                        <p>Choose your desired summary length (e.g., 'short', 'medium', 'long', or a specific number of sentences/paragraphs).</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3>Key Takeaways/Bullet Points</h3>
-                        <p>Quickly grasp the most important points of the article in an easy-to-digest bulleted list format.</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3>Summary Overlay/Sidebar</h3>
-                        <p>Displays the summary in a non-intrusive overlay or a collapsible sidebar next to the original article content.</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3>Multi-Language Support</h3>
-                        <p>Ability to summarize articles written in various languages and potentially translate the summary into the user's preferred language.</p>
-                    </div>
+    <!-- Features Section -->
+    <section class="features" style="padding: 60px 0;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+            <h2 style="color: #212529; margin-bottom: 30px; line-height: 1.2; font-size: 2.2em; text-align: center; margin-top: 40px;">Key Features Designed for You</h2>
+            <div class="features-grid" style="display: flex; flex-wrap: wrap; justify-content: center; margin-top: 40px;">
+                <div class="feature-card" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); padding: 30px; flex-grow: 1; flex-shrink: 1; flex-basis: calc(33% - 60px); min-width: 280px; text-align: center; display: flex; flex-direction: column; align-items: center; margin: 15px;">
+                    <span class="feature-icon" style="font-size: 3em; color: #007bff; margin-bottom: 15px; display: block;">&#x26a1;</span>
+                    <h3 style="color: #007bff; margin-top: 15px; margin-bottom: 10px; line-height: 1.2; font-size: 1.6em;">One-Click Summary Generation</h3>
+                    <p style="margin-bottom: 15px; font-size: 1em; color: #6c757d;">Instantly generate a concise summary of any article on your webpage with a single click.</p>
+                </div>
+                <div class="feature-card" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); padding: 30px; flex-grow: 1; flex-shrink: 1; flex-basis: calc(33% - 60px); min-width: 280px; text-align: center; display: flex; flex-direction: column; align-items: center; margin: 15px;">
+                    <span class="feature-icon" style="font-size: 3em; color: #007bff; margin-bottom: 15px; display: block;">&#x2699;&#xfe0f;</span>
+                    <h3 style="color: #007bff; margin-top: 15px; margin-bottom: 10px; line-height: 1.2; font-size: 1.6em;">Customizable Summary Length</h3>
+                    <p style="margin-bottom: 15px; font-size: 1em; color: #6c757d;">Tailor summaries to your needs &#x2013; choose short, medium, long, or a specific word/sentence count.</p>
+                </div>
+                <div class="feature-card" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); padding: 30px; flex-grow: 1; flex-shrink: 1; flex-basis: calc(33% - 60px); min-width: 280px; text-align: center; display: flex; flex-direction: column; align-items: center; margin: 15px;">
+                    <span class="feature-icon" style="font-size: 3em; color: #007bff; margin-bottom: 15px; display: block;">&#x1f4dd;</span>
+                    <h3 style="color: #007bff; margin-top: 15px; margin-bottom: 10px; line-height: 1.2; font-size: 1.6em;">Key Takeaways/Bullet Points</h3>
+                    <p style="margin-bottom: 15px; font-size: 1em; color: #6c757d;">Get summaries presented in easy-to-digest bullet points, highlighting the core concepts.</p>
+                </div>
+                <div class="feature-card" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); padding: 30px; flex-grow: 1; flex-shrink: 1; flex-basis: calc(33% - 60px); min-width: 280px; text-align: center; display: flex; flex-direction: column; align-items: center; margin: 15px;">
+                    <span class="feature-icon" style="font-size: 3em; color: #007bff; margin-bottom: 15px; display: block;">&#x1f50d;</span>
+                    <h3 style="color: #007bff; margin-top: 15px; margin-bottom: 10px; line-height: 1.2; font-size: 1.6em;">Contextual Highlighting</h3>
+                    <p style="margin-bottom: 15px; font-size: 1em; color: #6c757d;">See key sentences or phrases in the original article highlighted, corresponding to your summary points.</p>
+                </div>
+                <div class="feature-card" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); padding: 30px; flex-grow: 1; flex-shrink: 1; flex-basis: calc(33% - 60px); min-width: 280px; text-align: center; display: flex; flex-direction: column; align-items: center; margin: 15px;">
+                    <span class="feature-icon" style="font-size: 3em; color: #007bff; margin-bottom: 15px; display: block;">&#x1f4da;</span>
+                    <h3 style="color: #007bff; margin-top: 15px; margin-bottom: 10px; line-height: 1.2; font-size: 1.6em;">Summary History &amp; Management</h3>
+                    <p style="margin-bottom: 15px; font-size: 1em; color: #6c757d;">Access a history of all your summarized articles, allowing you to revisit summaries and original links anytime.</p>
+                </div>
+                <div class="feature-card" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); padding: 30px; flex-grow: 1; flex-shrink: 1; flex-basis: calc(33% - 60px); min-width: 280px; text-align: center; display: flex; flex-direction: column; align-items: center; margin: 15px;">
+                    <span class="feature-icon" style="font-size: 3em; color: #007bff; margin-bottom: 15px; display: block;">&#x1f4e4;</span>
+                    <h3 style="color: #007bff; margin-top: 15px; margin-bottom: 10px; line-height: 1.2; font-size: 1.6em;">Share Summary</h3>
+                    <p style="margin-bottom: 15px; font-size: 1em; color: #6c757d;">Easily copy the summary text or share it directly via email or your favorite social media platforms.</p>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2023 QuickRead AI. All rights reserved.</p>
-            <p>Made with ❤️ for busy readers.</p>
+    <!-- Call to Action Section -->
+    <section class="cta-section" id="install" style="background-color: #007bff; color: #ffffff; padding: 60px 20px; text-align: center; margin-top: 60px;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+            <h2 style="color: #ffffff; margin-bottom: 20px; line-height: 1.2; font-size: 2.5em; text-align: center; margin-top: 0;">Ready to Reclaim Your Reading Time?</h2>
+            <p style="margin: 0 auto 30px auto; font-size: 1.2em; max-width: 700px;">Join thousands of busy professionals, students, and researchers who are already saving hours every week. Install the Article Summarizer today!</p>
+            <a href="#" class="btn" style="display: inline-block; background-color: #28a745; color: #ffffff; padding: 12px 25px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 1.1em; border: none; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">Add to Chrome - It's Free!</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" style="text-align: center; padding: 30px 20px; margin-top: 50px; color: #6c757d; font-size: 0.9em; border-top: 1px solid #e9ecef;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+            <p style="margin-bottom: 15px;">&copy; 2023 Article Summarizer. All rights reserved.</p>
         </div>
     </footer>
 </body>
