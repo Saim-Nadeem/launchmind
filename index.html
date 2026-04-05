@@ -3,22 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SummarizeIt - Instant Article Summaries</title>
+    <title>QuickRead AI - Summarize Articles Instantly</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-color: #4F46E5; /* Indigo 600 */
             --primary-dark: #4338CA; /* Indigo 700 */
-            --secondary-color: #6EE7B7; /* Emerald 300 */
+            --secondary-color: #10B981; /* Emerald 500 */
             --text-color: #1F2937; /* Gray 900 */
-            --light-text-color: #4B5563; /* Gray 600 */
-            --background-color: #F9FAFB; /* Gray 50 */
-            --card-background: #FFFFFF;
+            --text-light: #4B5563; /* Gray 700 */
+            --background-light: #F9FAFB; /* Gray 50 */
+            --background-white: #FFFFFF;
             --border-color: #E5E7EB; /* Gray 200 */
             --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
 
+        /* Base Styles */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -29,7 +32,7 @@
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
             color: var(--text-color);
-            background-color: var(--background-color);
+            background-color: var(--background-white);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
@@ -42,7 +45,7 @@
 
         /* Header */
         header {
-            background-color: var(--card-background);
+            background-color: var(--background-white);
             padding: 1rem 0;
             border-bottom: 1px solid var(--border-color);
             box-shadow: var(--shadow-sm);
@@ -55,51 +58,48 @@
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.75rem;
             font-weight: 700;
             color: var(--primary-color);
             text-decoration: none;
         }
 
         /* Hero Section */
-        .hero {
-            background-color: var(--card-background);
+        #hero {
+            background-color: var(--background-light);
             padding: 6rem 0;
             text-align: center;
-            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 70vh; /* Ensure it takes up a good portion of the viewport */
         }
 
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
+        #hero h1 {
             font-size: 3.5rem;
             font-weight: 700;
-            color: var(--text-color);
+            color: var(--primary-color);
             margin-bottom: 1.5rem;
             line-height: 1.1;
         }
 
-        .hero p {
-            font-size: 1.25rem;
-            color: var(--light-text-color);
+        #hero p {
+            font-size: 1.5rem;
+            color: var(--text-light);
+            max-width: 800px;
             margin-bottom: 2.5rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
         }
 
         .btn {
             display: inline-block;
             background-color: var(--primary-color);
-            color: white;
+            color: var(--background-white);
             padding: 1rem 2.5rem;
             border-radius: 0.5rem;
             text-decoration: none;
+            font-size: 1.25rem;
             font-weight: 600;
-            font-size: 1.125rem;
             transition: background-color 0.3s ease, transform 0.2s ease;
             border: none;
             cursor: pointer;
@@ -111,17 +111,17 @@
         }
 
         /* Features Section */
-        .features {
+        #features {
             padding: 5rem 0;
-            background-color: var(--background-color);
+            background-color: var(--background-white);
         }
 
-        .features h2 {
-            text-align: center;
+        #features h2 {
             font-size: 2.5rem;
             font-weight: 700;
+            text-align: center;
+            margin-bottom: 3.5rem;
             color: var(--text-color);
-            margin-bottom: 4rem;
         }
 
         .features-grid {
@@ -131,8 +131,8 @@
         }
 
         .feature-card {
-            background-color: var(--card-background);
-            padding: 2rem;
+            background-color: var(--background-light);
+            padding: 2.5rem;
             border-radius: 0.75rem;
             box-shadow: var(--shadow-md);
             text-align: center;
@@ -145,78 +145,112 @@
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
 
-        .feature-card .icon {
-            font-size: 3rem;
+        .feature-card h3 {
+            font-size: 1.75rem;
+            font-weight: 600;
             color: var(--primary-color);
             margin-bottom: 1rem;
-            display: block;
-        }
-
-        .feature-card h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--text-color);
-            margin-bottom: 0.75rem;
         }
 
         .feature-card p {
-            font-size: 1rem;
-            color: var(--light-text-color);
+            font-size: 1.1rem;
+            color: var(--text-light);
         }
 
         /* Footer */
         footer {
             background-color: var(--text-color);
-            color: white;
+            color: var(--background-white);
+            padding: 3rem 0;
             text-align: center;
-            padding: 2rem 0;
             font-size: 0.9rem;
         }
 
-        /* Responsive Adjustments */
-        @media (max-width: 768px) {
-            .hero {
-                padding: 4rem 0;
-            }
+        footer p {
+            margin-bottom: 0.5rem;
+        }
 
-            .hero h1 {
+        footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 1024px) {
+            #hero h1 {
+                font-size: 3rem;
+            }
+            #hero p {
+                font-size: 1.3rem;
+            }
+            #features h2 {
+                font-size: 2.2rem;
+            }
+            .feature-card h3 {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            #hero {
+                padding: 4rem 0;
+                min-height: 60vh;
+            }
+            #hero h1 {
                 font-size: 2.5rem;
             }
-
-            .hero p {
-                font-size: 1rem;
+            #hero p {
+                font-size: 1.1rem;
             }
-
-            .features h2 {
-                font-size: 2rem;
-                margin-bottom: 3rem;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-
             .btn {
                 padding: 0.8rem 2rem;
-                font-size: 1rem;
+                font-size: 1.1rem;
+            }
+            #features {
+                padding: 3rem 0;
+            }
+            #features h2 {
+                font-size: 2rem;
+                margin-bottom: 2.5rem;
+            }
+            .features-grid {
+                grid-template-columns: 1fr; /* Stack features on small screens */
+            }
+            .feature-card {
+                padding: 2rem;
             }
         }
 
         @media (max-width: 480px) {
-            .hero h1 {
+            .container {
+                padding: 0 1rem;
+            }
+            .logo {
+                font-size: 1.5rem;
+            }
+            #hero h1 {
                 font-size: 2rem;
             }
-
-            .hero p {
-                font-size: 0.9rem;
+            #hero p {
+                font-size: 1rem;
             }
-
-            .features h2 {
-                font-size: 1.75rem;
+            .btn {
+                padding: 0.7rem 1.8rem;
+                font-size: 1rem;
             }
-
-            .logo {
-                font-size: 1.25rem;
+            #features h2 {
+                font-size: 1.8rem;
+            }
+            .feature-card h3 {
+                font-size: 1.3rem;
+            }
+            .feature-card p {
+                font-size: 1rem;
             }
         }
     </style>
@@ -224,52 +258,42 @@
 <body>
     <header>
         <div class="container navbar">
-            <a href="#" class="logo">SummarizeIt</a>
+            <a href="#" class="logo">QuickRead AI</a>
         </div>
     </header>
 
     <main>
-        <section class="hero">
-            <div class="container hero-content">
-                <h1>Grasp Key Information, Save Precious Time.</h1>
-                <p>SummarizeIt is a browser extension that provides concise, on-demand summaries of long articles, helping busy professionals, students, and casual readers quickly get the gist without the full read.</p>
-                <a href="#features" class="btn">Learn More</a>
+        <section id="hero">
+            <div class="container">
+                <h1>QuickRead AI: Summarize Articles Instantly.</h1>
+                <p>A browser extension that summarises long articles before you read them, helping busy professionals, students, and casual readers quickly grasp key information and decide if a full read is necessary.</p>
+                <a href="#" class="btn">Add to Chrome - It's Free!</a>
             </div>
         </section>
 
-        <section id="features" class="features">
+        <section id="features">
             <div class="container">
-                <h2>Key Features Designed for You</h2>
+                <h2>Powerful Features to Boost Your Reading Efficiency</h2>
                 <div class="features-grid">
                     <div class="feature-card">
-                        <span class="icon">⚡</span>
                         <h3>On-Demand Summary Generation</h3>
-                        <p>Get a concise summary of any article with a single click on the browser extension icon. Instant insights, no hassle.</p>
+                        <p>Get a concise summary of the current web article with a single click of the extension icon.</p>
                     </div>
                     <div class="feature-card">
-                        <span class="icon">⚙️</span>
                         <h3>Customizable Summary Length</h3>
-                        <p>Tailor your summaries! Choose your desired length, from a few sentences to bullet points or a full paragraph, to suit your needs.</p>
+                        <p>Choose your desired summary length (e.g., 'short', 'medium', 'long', or a specific number of sentences/paragraphs).</p>
                     </div>
                     <div class="feature-card">
-                        <span class="icon">💡</span>
-                        <h3>Key Takeaways & Bullet Points</h3>
-                        <p>Quickly digest the main ideas and arguments. Summaries are presented in an easy-to-read bullet-point format, highlighting core concepts.</p>
+                        <h3>Key Takeaways/Bullet Points</h3>
+                        <p>Quickly grasp the most important points of the article in an easy-to-digest bulleted list format.</p>
                     </div>
                     <div class="feature-card">
-                        <span class="icon">↔️</span>
-                        <h3>Contextual Pop-up/Sidebar Display</h3>
-                        <p>View summaries without leaving the page. Our non-intrusive pop-up or collapsible sidebar keeps your reading flow uninterrupted.</p>
+                        <h3>Summary Overlay/Sidebar</h3>
+                        <p>Displays the summary in a non-intrusive overlay or a collapsible sidebar next to the original article content.</p>
                     </div>
                     <div class="feature-card">
-                        <span class="icon">🌐</span>
-                        <h3>Multi-language Support</h3>
-                        <p>Expand your reach. Summarize articles written in various languages, making the tool useful for a global audience.</p>
-                    </div>
-                    <div class="feature-card">
-                        <span class="icon">⏱️</span>
-                        <h3>Save Time, Boost Productivity</h3>
-                        <p>Stop wasting time on irrelevant content. Quickly identify valuable articles and focus your energy where it matters most.</p>
+                        <h3>Multi-Language Support</h3>
+                        <p>Ability to summarize articles written in various languages and potentially translate the summary into the user's preferred language.</p>
                     </div>
                 </div>
             </div>
@@ -278,7 +302,8 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2023 SummarizeIt. All rights reserved.</p>
+            <p>&copy; 2023 QuickRead AI. All rights reserved.</p>
+            <p>Made with ❤️ for busy readers.</p>
         </div>
     </footer>
 </body>
