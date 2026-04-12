@@ -3,229 +3,329 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Summarize Anything - Your Smart Article Summarizer Extension</title>
+    <title>Gistify: Instant Article Summaries</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
     <style>
-        /* Internal CSS for general layout, hover effects, and responsiveness */
+        /* General Styles */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+            scroll-behavior: smooth;
+        }
 
-        /* Container for content centering and max-width */
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
 
-        /* Hero Section Child Elements */
-        .hero h1 {
-            font-size: 3.2em;
-            margin-bottom: 20px;
+        h1, h2, h3 {
+            color: #222;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 3em;
             line-height: 1.1;
+        }
+
+        h2 {
+            font-size: 2.2em;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h3 {
+            font-size: 1.5em;
+        }
+
+        p {
+            margin-bottom: 1em;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #007bff; /* Primary blue */
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #e0f2f7 0%, #c2e0f0 100%); /* Light blue gradient */
+            padding: 80px 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            filter: blur(50px);
+            z-index: 0;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 250px;
+            height: 250px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            filter: blur(60px);
+            z-index: 0;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.8em;
+            margin-bottom: 20px;
+            color: #004085; /* Darker blue for heading */
             font-weight: 700;
-            color: #004d40;
         }
 
         .hero p {
             font-size: 1.4em;
             margin-bottom: 40px;
+            color: #333;
             max-width: 700px;
-            color: #00695c;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        /* Call-to-Action Button Styling (Hover and Transition) */
-        .cta-button {
-            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-            box-shadow: 0 6px 15px rgba(0, 123, 255, 0.3);
-        }
-
-        .cta-button:hover {
-            background-color: #0056b3 !important; /* Override inline style on hover */
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4);
-        }
-
-        /* Features Section Styling */
+        /* Features Section */
         .features {
-            padding: 60px 0;
+            padding: 80px 20px;
+            background-color: #fff;
             text-align: center;
         }
 
-        .features h2 {
-            font-size: 2.8em;
-            margin-bottom: 60px;
-            color: #2c3e50;
-            font-weight: 700;
-        }
-
-        .feature-grid {
+        .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
-            text-align: left;
+            margin-top: 50px;
         }
 
-        /* Feature Item Styling (Hover and Transition) */
         .feature-item {
+            background-color: #f0f8ff; /* Very light blue */
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            text-align: left;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 5px solid #007bff;
         }
 
         .feature-item:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important; /* Override inline style on hover */
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
         }
 
         .feature-item h3 {
-            font-size: 1.6em;
+            color: #0056b3;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-item h3 svg {
             color: #007bff;
-            margin-bottom: 15px;
-            font-weight: 600;
         }
 
         .feature-item p {
-            font-size: 1.15em;
             color: #555;
-            line-height: 1.7;
+            font-size: 1.05em;
         }
 
-        /* Final Call to Action Section Child Elements */
-        .final-cta h2 {
+        /* Call to Action Section */
+        .cta-section {
+            background-color: #007bff;
+            color: #fff;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            color: #fff;
             font-size: 2.5em;
-            color: #2c3e50;
-            margin-bottom: 25px;
-            font-weight: 700;
+            margin-bottom: 20px;
         }
 
-        .final-cta p {
+        .cta-section p {
             font-size: 1.3em;
-            color: #555;
-            max-width: 600px;
-            margin: 0 auto 40px auto;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-section .button {
+            background-color: #28a745; /* Green for a strong CTA */
+        }
+
+        .cta-section .button:hover {
+            background-color: #218838;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            background-color: #333;
+            color: #eee;
+            font-size: 0.9em;
         }
 
         /* Responsive Adjustments */
         @media (max-width: 768px) {
-            .hero {
-                padding: 60px 15px !important;
-            }
             .hero h1 {
-                font-size: 2.5em;
+                font-size: 2.8em;
             }
             .hero p {
                 font-size: 1.2em;
             }
-            .cta-button {
-                padding: 15px 30px !important;
-                font-size: 1.1em !important;
+            h2 {
+                font-size: 1.8em;
             }
-            .features h2 {
-                font-size: 2.2em;
-                margin-bottom: 40px;
-            }
-            .feature-grid {
-                grid-template-columns: 1fr; /* Stack features on smaller screens */
+            .features-grid {
+                grid-template-columns: 1fr;
             }
             .feature-item {
-                padding: 25px !important;
+                text-align: center;
+                border-left: none;
+                border-top: 5px solid #007bff;
             }
             .feature-item h3 {
-                font-size: 1.4em;
+                justify-content: center;
             }
-            .feature-item p {
-                font-size: 1.05em;
-            }
-            .final-cta {
-                padding: 60px 15px !important;
-            }
-            .final-cta h2 {
+            .cta-section h2 {
                 font-size: 2em;
             }
-            .final-cta p {
+            .cta-section p {
                 font-size: 1.1em;
             }
         }
 
         @media (max-width: 480px) {
-            .hero {
-                padding: 40px 10px !important;
-            }
             .hero h1 {
-                font-size: 2em;
+                font-size: 2.2em;
             }
             .hero p {
                 font-size: 1em;
             }
-            .cta-button {
-                padding: 12px 25px !important;
-                font-size: 1em !important;
-            }
-            .features h2 {
-                font-size: 1.8em;
-            }
-            .feature-item {
-                padding: 20px !important;
-            }
-            .feature-item h3 {
-                font-size: 1.3em;
-            }
-            .feature-item p {
-                font-size: 1em;
-            }
-            .final-cta {
-                padding: 40px 10px !important;
-            }
-            .final-cta h2 {
-                font-size: 1.8em;
-            }
-            .final-cta p {
+            .button {
+                padding: 12px 25px;
                 font-size: 1em;
             }
         }
     </style>
 </head>
-<body style="font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; margin: 0; padding: 0; line-height: 1.6; color: #333; background-color: #f9f9f9; scroll-behavior: smooth;">
-    <div class="container">
-        <!-- Hero Section -->
-        <section class="hero" style="background-color: #e0f7fa; color: #004d40; text-align: center; padding: 80px 20px; border-radius: 12px; margin-bottom: 40px; box-shadow: 0 6px 20px rgba(0,0,0,0.08); display: flex; flex-direction: column; align-items: center; justify-content: center;">
-            <h1>Summarize Any Article. Instantly.</h1>
-            <p>A powerful browser extension that condenses lengthy articles into key insights, helping busy professionals, students, and knowledge workers quickly grasp essential information and save precious time.</p>
-            <a href="#download" class="cta-button" style="display: inline-block; background-color: #007bff; color: white; padding: 18px 35px; border-radius: 50px; text-decoration: none; font-size: 1.3em; font-weight: bold; border: none; cursor: pointer;">Get the Extension Now</a>
-        </section>
+<body>
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Gistify: Instantly Grasp Any Article.</h1>
+            <p>Stop wasting time sifting through endless text. Gistify provides concise, AI-powered summaries of long articles, academic papers, and web content, helping you quickly decide what's worth your full attention.</p>
+            <a href="#cta" class="button">Add to Chrome - It's Free!</a>
+        </div>
+    </header>
 
-        <!-- Features Section -->
-        <section class="features">
-            <h2>Unlock Your Reading Potential</h2>
-            <div class="feature-grid">
-                <div class="feature-item" style="background-color: white; padding: 35px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); display: flex; flex-direction: column; align-items: flex-start;">
-                    <h3>One-Click Summary Generation</h3>
-                    <p>Get a concise summary of any article with just a single click on the extension icon. No more endless scrolling or information overload.</p>
+    <section class="features">
+        <div class="container">
+            <h2>Unlock Key Insights, Faster.</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <h3>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-zap"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                        On-Demand Summarization
+                    </h3>
+                    <p>Click the Gistify icon to instantly generate a summary of the currently open article or webpage content. Get the core message in seconds.</p>
                 </div>
-                <div class="feature-item" style="background-color: white; padding: 35px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); display: flex; flex-direction: column; align-items: flex-start;">
-                    <h3>Customizable Summary Length</h3>
-                    <p>Tailor your summaries to your needs. Choose between short bullet points, medium paragraphs, or a more detailed synopsis.</p>
+                <div class="feature-item">
+                    <h3>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sliders"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
+                        Customizable Length
+                    </h3>
+                    <p>Tailor your summary to your needs. Choose between short, medium, or detailed versions, or specify a desired number of sentences or paragraphs.</p>
                 </div>
-                <div class="feature-item" style="background-color: white; padding: 35px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); display: flex; flex-direction: column; align-items: flex-start;">
-                    <h3>Key Takeaways & Bullet Points</h3>
-                    <p>Our summaries are designed for quick comprehension, presenting core arguments and findings in an easy-to-read, bulleted format.</p>
+                <div class="feature-item">
+                    <h3>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+                        Key Takeaways
+                    </h3>
+                    <p>Get the most critical information at a glance. Summaries can be presented as a clear, concise list of bullet points, highlighting essential facts.</p>
                 </div>
-                <div class="feature-item" style="background-color: white; padding: 35px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); display: flex; flex-direction: column; align-items: flex-start;">
-                    <h3>Contextual Summary Display</h3>
-                    <p>View summaries in a non-intrusive overlay or a collapsible sidebar, allowing you to reference key points alongside the original article.</p>
+                <div class="feature-item">
+                    <h3>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layout"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                        Contextual Display
+                    </h3>
+                    <p>Summaries appear in a non-intrusive overlay or sidebar within your browser, allowing you to easily compare them with the original article without leaving the page.</p>
                 </div>
-                <div class="feature-item" style="background-color: white; padding: 35px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); display: flex; flex-direction: column; align-items: flex-start;">
-                    <h3>Copy & Share with Ease</h3>
-                    <p>Instantly copy generated summaries to your clipboard or share them directly with colleagues and friends via email or messaging apps.</p>
+                <div class="feature-item">
+                    <h3>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                        Multi-Language Support
+                    </h3>
+                    <p>Break down language barriers. Summarize articles in multiple languages and even translate the summaries into your preferred language.</p>
                 </div>
-                <div class="feature-item" style="background-color: white; padding: 35px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); display: flex; flex-direction: column; align-items: flex-start;">
-                    <h3>Multi-Language Support</h3>
-                    <p>Break down language barriers! Summarize articles not just in English, but also in Spanish, French, German, and many other languages.</p>
+                <div class="feature-item">
+                    <h3>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        Save Time & Focus
+                    </h3>
+                    <p>Efficiently sift through industry news, academic papers, or casual reads. Quickly determine relevance and save valuable time for what truly matters.</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Final Call to Action Section -->
-        <section class="final-cta" id="download" style="text-align: center; padding: 80px 20px; background-color: #f0f8ff; border-radius: 12px; margin-top: 60px; margin-bottom: 40px; box-shadow: 0 6px 20px rgba(0,0,0,0.08);">
-            <h2>Ready to Save Hours of Reading Every Week?</h2>
-            <p>Join thousands of busy professionals, students, and knowledge workers who are already boosting their productivity and staying informed effortlessly.</p>
-            <a href="#" class="cta-button" style="display: inline-block; background-color: #007bff; color: white; padding: 18px 35px; border-radius: 50px; text-decoration: none; font-size: 1.3em; font-weight: bold; border: none; cursor: pointer;">Add to Chrome - It's Free!</a>
-        </section>
-    </div>
+    <section id="cta" class="cta-section">
+        <div class="container">
+            <h2>Ready to Read Smarter, Not Harder?</h2>
+            <p>Join thousands of busy professionals, students, and curious readers who are already saving hours every week. Get Gistify today!</p>
+            <a href="#" class="button">Install Gistify for Chrome Now!</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2023 Gistify. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>
